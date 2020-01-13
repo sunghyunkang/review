@@ -18,17 +18,16 @@ public class Anagrams {
         int minGroupSize = Integer.parseInt(args[1]);
 
         try(Stream<String> words = Files.lines(dictionary)){
-            words.collect(
-                    groupingBy(word -> word.chars().sorted()
-                            .collect(StringBuilder::new,
-                                    (sb, c) -> sb.append((char) c),
-                                    StringBuilder::append).toString()))
+            words.collect(groupingBy(word -> alphabetize(word)))
                     .values().stream()
                     .filter(group -> group.size() >= minGroupSize)
-                    .map(group -> group.size() + " : " + group)
-                    .forEach(System.out::println);
+                    .forEach(group -> System.out.println(group.size() + ": " + group));
         }
     }
 
-
+    private static String alphabetize(String s){
+        char[] a = s.toCharArray();
+        Arrays.sort(a);
+        return new String(a);
+    }
 }
