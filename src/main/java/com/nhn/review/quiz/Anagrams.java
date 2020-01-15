@@ -25,6 +25,7 @@ public class Anagrams {
         }
 
         System.out.println("수정1");
+        System.out.println("수정2");
     }
 
     private static String alphabetize(String s){
